@@ -67,7 +67,7 @@ int KILL_PROC_BY_NAME(const TCHAR* szToTerminate)
     TCHAR szName[MAX_PATH], szToTermUpper[MAX_PATH];
     HANDLE hProc, hSnapShot, hSnapShotm;
     OSVERSIONINFO osvi;
-    HINSTANCE hInstLib;
+    HINSTANCE hInstLib = 0;
     int iLenP, indx;
     HMODULE hMod;
     PROCESSENTRY32 procentry;
@@ -105,6 +105,9 @@ int KILL_PROC_BY_NAME(const TCHAR* szToTerminate)
     if ((osvi.dwPlatformId != VER_PLATFORM_WIN32_NT) &&
         (osvi.dwPlatformId != VER_PLATFORM_WIN32_WINDOWS))
         return 607;
+    
+    // skip killing current process
+    DWORD cpID = GetCurrentProcessId();
 
     if (osvi.dwPlatformId == VER_PLATFORM_WIN32_NT)
     {
@@ -151,6 +154,11 @@ int KILL_PROC_BY_NAME(const TCHAR* szToTerminate)
         // Get and match the name of each process
         for (i = 0; i < iNumProc; i++)
         {
+            // skip kill self process
+            if (cpID == aiPID[i])
+            {
+                continue;
+            }
             // Get the (module) name for this process
 
             _tcscpy(szName, _T("Unknown"));
