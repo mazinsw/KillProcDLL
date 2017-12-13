@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout>
 	<Files>
-		<File Name="pluginapi.h" Top="Yes" Tabpos="1" TopLine="13">
-			<Cursor Line="1" Column="1"/>
+		<File Name="KillProcDLL.c" Top="Yes" Tabpos="1" TopLine="73">
+			<Cursor Line="78" Column="6"/>
 		</File>
 	</Files>
 </Layout>
